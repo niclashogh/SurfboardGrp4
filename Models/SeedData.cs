@@ -23,52 +23,52 @@ namespace SurfboardGrp4.Models
                 context.Board.AddRange(
                     new Board
                     {
-                        Name = "A",
-                        Length = 10,
-                        Width = 10,
-                        Thickness = 10,
-                        Volume = 10,
-                        Type = "",
-                        Price = 10,
+                        Name = "The Minilog",
+                        Length = 6,
+                        Width = 21,
+                        Thickness = 2.75,
+                        Volume = 38.8,
+                        Type = "Shortboard",
+                        Price = 565,
                         Equipment = "",
                         ImgUrl = ""
                     },
 
                     new Board
                     {
-                        Name = "B",
-                        Length = 10,
-                        Width = 10,
-                        Thickness = 10,
-                        Volume = 10,
-                        Type = "",
-                        Price = 10,
+                        Name = "The Wide Glider",
+                        Length = 7.1,
+                        Width = 21.75,
+                        Thickness = 2.75,
+                        Volume = 44.16,
+                        Type = "Funboard",
+                        Price = 685,
                         Equipment = "",
                         ImgUrl = ""
                     },
 
                     new Board
                     {
-                        Name = "C",
-                        Length = 10,
-                        Width = 10,
-                        Thickness = 10,
-                        Volume = 10,
-                        Type = "",
-                        Price = 10,
+                        Name = "The Golden Ratio",
+                        Length = 6.3,
+                        Width = 21.85,
+                        Thickness = 2.9,
+                        Volume = 43.22,
+                        Type = "Funboard",
+                        Price = 695,
                         Equipment = "",
                         ImgUrl = ""
                     },
 
                     new Board
                     {
-                        Name = "H",
-                        Length = 10,
-                        Width = 10,
-                        Thickness = 10,
-                        Volume = 10,
-                        Type = "",
-                        Price = 10,
+                        Name = "Mahi Mahi",
+                        Length = 5.4,
+                        Width = 20.75,
+                        Thickness = 2.3,
+                        Volume = 29.39,
+                        Type = "Fish",
+                        Price = 645,
                         Equipment = "",
                         ImgUrl = ""
                     }

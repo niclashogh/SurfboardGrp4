@@ -30,7 +30,8 @@ namespace SurfboardGrp4.Models
                         Volume = 10,
                         Type = "",
                         Price = 10,
-                        Equipment = ""
+                        Equipment = "",
+                        ImgUrl = ""
                     },
 
                     new Board
@@ -42,7 +43,8 @@ namespace SurfboardGrp4.Models
                         Volume = 10,
                         Type = "",
                         Price = 10,
-                        Equipment = ""
+                        Equipment = "",
+                        ImgUrl = ""
                     },
 
                     new Board
@@ -54,7 +56,8 @@ namespace SurfboardGrp4.Models
                         Volume = 10,
                         Type = "",
                         Price = 10,
-                        Equipment = ""
+                        Equipment = "",
+                        ImgUrl = ""
                     },
 
                     new Board
@@ -66,7 +69,8 @@ namespace SurfboardGrp4.Models
                         Volume = 10,
                         Type = "",
                         Price = 10,
-                        Equipment = ""
+                        Equipment = "",
+                        ImgUrl = ""
                     }
                 );
                 context.SaveChanges();

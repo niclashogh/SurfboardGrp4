@@ -11,5 +11,7 @@
         public string Type { get; set; }
         public int Price { get; set; }
         public string? Equipment { get; set; }
+
+        public string? ImgUrl { get; set; }
     }
 }

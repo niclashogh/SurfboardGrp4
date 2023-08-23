@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SurfboardGrp4.Data;
 
@@ -10,9 +11,11 @@ using SurfboardGrp4.Data;
 namespace SurfboardGrp4.Migrations
 {
     [DbContext(typeof(SurfboardGrp4Context))]
-    partial class SurfboardGrp4ContextModelSnapshot : ModelSnapshot
+    [Migration("20230823104817_ImgUrl")]
+    partial class ImgUrl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

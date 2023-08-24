@@ -72,14 +72,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Equipment)
             </td>
-@*                <td>
-                    @Html.DisplayFor(modelItem => item.ImgUrl)
-                </td>*@
+
                 <td>
-                    <img src="~/images/package.jpg" alt="Image" class="table-image" /> <!-- Image for each entry -->
+                    <img src="~/images/package.jpg" alt="Image" class="table-image" />
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ImgUrl) <!-- Display the ImgUrl -->
+                    @Html.DisplayFor(modelItem => item.ImgUrl)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

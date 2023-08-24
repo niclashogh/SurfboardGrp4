@@ -11,6 +11,9 @@
 </p>
 <table class="table">
     <thead>
+        <!-- ... existing headers ... -->
+    <th>Image</th> <!-- New column for images -->
+    <th></th>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -69,15 +72,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Equipment)
             </td>
-                <td>
+@*                <td>
                     @Html.DisplayFor(modelItem => item.ImgUrl)
+                </td>*@
+                <td>
+                    <img src="~/images/package.jpg" alt="Image" class="table-image" /> <!-- Image for each entry -->
                 </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImgUrl) <!-- Display the ImgUrl -->
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

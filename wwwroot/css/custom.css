@@ -1,0 +1,10 @@
+﻿.logo-image {
+    width: 80px; /* Adjust the width as needed */
+    height: auto;
+    z-index: 1;
+}
+
+.table-image {
+    width: 50px; /* Adjust the size as needed */
+    height: auto;
+}

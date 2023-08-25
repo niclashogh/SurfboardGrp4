@@ -48,6 +48,13 @@ namespace SurfboardGrp4.Controllers
         // GET: Boards/Create
         public IActionResult Create()
         {
+
+            ViewBag.ImageOptions = new List<string>
+    {
+        @"D:\GitHub\3 semester projekt\SurfboardGrp4\wwwroot\images\light.jpg",
+        @"D:\GitHub\3 semester projekt\SurfboardGrp4\wwwroot\images\package.jpg"
+    };
+
             return View();
         }
 
@@ -64,6 +71,13 @@ namespace SurfboardGrp4.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.ImageOptions = new List<string>
+    {
+        @"D:\GitHub\3 semester projekt\SurfboardGrp4\wwwroot\images\light.jpg",
+        @"D:\GitHub\3 semester projekt\SurfboardGrp4\wwwroot\images\package.jpg"
+    };
+
             return View(board);
         }
 
@@ -80,6 +94,13 @@ namespace SurfboardGrp4.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.ImageOptions = new List<string>
+    {
+        @"D:\GitHub\3 semester projekt\SurfboardGrp4\wwwroot\images\light.jpg",
+        @"D:\GitHub\3 semester projekt\SurfboardGrp4\wwwroot\images\package.jpg"
+    };
+
             return View(board);
         }
 

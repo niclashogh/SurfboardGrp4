@@ -32,6 +32,16 @@ namespace SurfboardGrp4.Controllers
             // ViewData["LengthSortParm"] = sortOrder == "Length" ? "length_desc" : "Length";
             ViewData["LengthSortParm"] = String.IsNullOrEmpty(sortOrder) ? "length_desc" : "";
             ViewData["TypeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "type_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
+
+            var boards = from b in _context.Board
+                         select b;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                boards = boards.Where(s => s.Name.Contains(searchString)
+                                       || s.Equipment.Contains(searchString));
+            }
 
             if (searchString != null)
             {
@@ -41,9 +51,6 @@ namespace SurfboardGrp4.Controllers
             {
                 searchString = currentFilter;
             }
-
-            var boards = from b in _context.Board
-                           select b;
 
             switch (sortOrder)
             {

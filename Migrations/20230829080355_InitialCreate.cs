@@ -5,7 +5,7 @@
 namespace SurfboardGrp4.Migrations
 {
     /// <inheritdoc />
-    public partial class InitCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,7 +23,8 @@ namespace SurfboardGrp4.Migrations
                     Volume = table.Column<double>(type: "float", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),
-                    Equipment = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Equipment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

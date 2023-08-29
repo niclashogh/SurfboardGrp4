@@ -10,9 +10,9 @@ namespace SurfboardGrp4.Models
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new SurfboardGrp4Context(
+            using (var context = new BoardContext(
                 serviceProvider.GetRequiredService<
-                    DbContextOptions<SurfboardGrp4Context>>()))
+                    DbContextOptions<BoardContext>>()))
             {
                 // Look for any movies.
                 if (context.Board.Any())
@@ -23,137 +23,55 @@ namespace SurfboardGrp4.Models
                 context.Board.AddRange(
                     new Board
                     {
-                        Name = "The Minilog",
-                        Length = 6,
-                        Width = 21,
-                        Thickness = 2.75,
-                        Volume = 38.8,
-                        Type = "Shortboard",
-                        Price = 565,
+                        Name = "Board A",
+                        Length = 10,
+                        Width = 10,
+                        Thickness = 10,
+                        Volume = 10,
+                        Type = "Unknown",
+                        Price = 11,
                         Equipment = "",
-                        ImgUrl = ""
+                        ImgUrl = "https://www.stuffdesign.dk/wp-content/uploads/2021/01/dd-13251n.jpg"
                     },
 
                     new Board
                     {
-                        Name = "The Wide Glider",
-                        Length = 7.1,
-                        Width = 21.75,
-                        Thickness = 2.75,
-                        Volume = 44.16,
-                        Type = "Funboard",
-                        Price = 685,
+                        Name = "Board B",
+                        Length = 10,
+                        Width = 10,
+                        Thickness = 10,
+                        Volume = 10,
+                        Type = "Unknown",
+                        Price = 11,
                         Equipment = "",
-                        ImgUrl = ""
+                        ImgUrl = "https://www.stuffdesign.dk/wp-content/uploads/2021/01/dd-13251n.jpg"
                     },
 
                     new Board
                     {
-                        Name = "The Golden Ratio",
-                        Length = 6.3,
-                        Width = 21.85,
-                        Thickness = 2.9,
-                        Volume = 43.22,
-                        Type = "Funboard",
-                        Price = 695,
+                        Name = "Board C",
+                        Length = 10,
+                        Width = 10,
+                        Thickness = 10,
+                        Volume = 10,
+                        Type = "Unknown",
+                        Price = 11,
                         Equipment = "",
-                        ImgUrl = ""
+                        ImgUrl = "https://www.stuffdesign.dk/wp-content/uploads/2021/01/dd-13251n.jpg"
                     },
 
                     new Board
                     {
-                        Name = "Mahi Mahi",
-                        Length = 5.4,
-                        Width = 20.75,
-                        Thickness = 2.3,
-                        Volume = 29.39,
-                        Type = "Fish",
-                        Price = 645,
+                        Name = "Board D",
+                        Length = 10,
+                        Width = 10,
+                        Thickness = 10,
+                        Volume = 10,
+                        Type = "Unknown",
+                        Price = 11,
                         Equipment = "",
-                        ImgUrl = ""
-                    },
-
-
-                    new Board
-                    {
-                        Name = "The Emerald Glider",
-                        Length = 9.2,
-                        Width = 22.8,
-                        Thickness = 2.8,
-                        Volume = 65.4,
-                        Type = "Longboard",
-                        Price = 895,
-                        Equipment = "",
-                        ImgUrl = ""
-                    },
-
-                    new Board
-                    {
-                        Name = "The Bomb",
-                        Length = 5.5,
-                        Width = 21,
-                        Thickness = 2.5,
-                        Volume = 33.7,
-                        Type = "Shortboard",
-                        Price = 645,
-                        Equipment = "",
-                        ImgUrl = ""
-                    },
-
-
-                    new Board
-                    {
-                        Name = "Walden Magic",
-                        Length = 9.6,
-                        Width = 19.4,
-                        Thickness = 3,
-                        Volume = 80,
-                        Type = "Longboard",
-                        Price = 1025,
-                        Equipment = "",
-                        ImgUrl = ""
-                    },
-
-                    new Board
-                    {
-                        Name = "Naish One",
-                        Length = 12.6,
-                        Width = 30,
-                        Thickness = 6,
-                        Volume = 301,
-                        Type = "SUB",
-                        Price = 854,
-                        Equipment = "Paddle",
-                        ImgUrl = ""
-                    },
-
-                    new Board
-                    {
-                        Name = "Six Tourer",
-                        Length = 11.6,
-                        Width = 32,
-                        Thickness = 6,
-                        Volume = 270,
-                        Type = "SUB",
-                        Price = 611,
-                        Equipment = "Fin, Paddle, Pump, Leash",
-                        ImgUrl = ""
-                    },
-
-                    new Board
-                    {
-                        Name = "Naish Maliko",
-                        Length = 14,
-                        Width = 25,
-                        Thickness = 6,
-                        Volume = 330,
-                        Type = "SUB",
-                        Price = 1304,
-                        Equipment = "Fin, Paddle, Pump, Leash",
-                        ImgUrl = ""
+                        ImgUrl = "https://www.stuffdesign.dk/wp-content/uploads/2021/01/dd-13251n.jpg"
                     }
-
-
                 );
                 context.SaveChanges();
             }

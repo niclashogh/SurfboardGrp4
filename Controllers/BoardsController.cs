@@ -5,16 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SurfboardGrp4.Data;
+using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 using SurfboardGrp4.Models;
+using SurfboardGrp4.Data;
 
 namespace SurfboardGrp4.Controllers
 {
     public class BoardsController : Controller
     {
-        private readonly SurfboardGrp4Context _context;
+        private readonly BoardContext _context;
 
-        public BoardsController(SurfboardGrp4Context context)
+        public BoardsController(BoardContext context)
         {
             _context = context;
         }
@@ -24,7 +25,7 @@ namespace SurfboardGrp4.Controllers
         {
               return _context.Board != null ? 
                           View(await _context.Board.ToListAsync()) :
-                          Problem("Entity set 'SurfboardGrp4Context.Board'  is null.");
+                          Problem("Entity set 'BoardContext.Board'  is null.");
         }
 
         // GET: Boards/Details/5
@@ -143,7 +144,7 @@ namespace SurfboardGrp4.Controllers
         {
             if (_context.Board == null)
             {
-                return Problem("Entity set 'SurfboardGrp4Context.Board'  is null.");
+                return Problem("Entity set 'BoardContext.Board'  is null.");
             }
             var board = await _context.Board.FindAsync(id);
             if (board != null)

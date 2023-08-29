@@ -1,5 +1,9 @@
-﻿namespace SurfboardGrp4.Models
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SurfboardGrp4.Models
 {
+    [PrimaryKey(nameof(ID))]
     public class Board
     {
         public int ID { get; set; }
@@ -13,5 +17,13 @@
         public string? Equipment { get; set; }
 
         public string? ImgUrl { get; set; }
+    }
+
+    [PrimaryKey(nameof(Url))]
+    public class ImageUrl
+    {
+        [ForeignKey(nameof(Board.ID))]
+        public string? Url { get; set; }
+
     }
 }

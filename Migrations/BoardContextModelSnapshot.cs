@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SurfboardGrp4.Data;
 
@@ -10,12 +9,10 @@ using SurfboardGrp4.Data;
 
 namespace SurfboardGrp4.Migrations
 {
-    [DbContext(typeof(SurfboardGrp4Context))]
-    [Migration("20230823192051_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(BoardContext))]
+    partial class BoardContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

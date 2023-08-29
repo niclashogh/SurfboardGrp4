@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using SurfboardGrp4.Data;
 using SurfboardGrp4.Models;
+using SurfboardGrp4.Data;
 
 namespace SurfboardGrp4
 {
@@ -10,8 +10,8 @@ namespace SurfboardGrp4
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<SurfboardGrp4Context>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("SurfboardGrp4Context") ?? throw new InvalidOperationException("Connection string 'SurfboardGrp4Context' not found.")));
+            builder.Services.AddDbContext<BoardContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("BoardContext") ?? throw new InvalidOperationException("Connection string 'BoardContext' not found.")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

@@ -7,9 +7,9 @@ using SurfboardGrp4.Models;
 
 namespace SurfboardGrp4.Data
 {
-    public class SurfboardGrp4Context : DbContext
+    public class BoardContext : DbContext
     {
-        public SurfboardGrp4Context (DbContextOptions<SurfboardGrp4Context> options)
+        public BoardContext(DbContextOptions<BoardContext> options)
             : base(options)
         {
         }

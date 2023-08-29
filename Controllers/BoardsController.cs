@@ -20,12 +20,27 @@ namespace SurfboardGrp4.Controllers
         }
 
         // GET: Boards
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string searchString,
+            string currentFilter,
+            int? pageNumber
+            )
         {
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             // ViewData["LengthSortParm"] = sortOrder == "Length" ? "length_desc" : "Length";
             ViewData["LengthSortParm"] = String.IsNullOrEmpty(sortOrder) ? "length_desc" : "";
             ViewData["TypeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "type_desc" : "";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
             var boards = from b in _context.Board
                            select b;
@@ -45,7 +60,8 @@ namespace SurfboardGrp4.Controllers
                     break;
             }
 
-            return View(await boards.AsNoTracking().ToListAsync());
+            int pageSize = 5;
+            return View(await PaginatedList<Board>.CreateAsync(boards.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Boards/Details/5

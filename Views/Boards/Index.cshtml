@@ -13,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Length)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["LengthSortParm"]">@Html.DisplayNameFor(model => model.Length)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Width)
@@ -28,7 +28,7 @@
                 @Html.DisplayNameFor(model => model.Volume)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TypeSortParm"]">@Html.DisplayNameFor(model => model.Type)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)

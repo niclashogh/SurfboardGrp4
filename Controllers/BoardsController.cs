@@ -20,11 +20,32 @@ namespace SurfboardGrp4.Controllers
         }
 
         // GET: Boards
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-              return _context.Board != null ? 
-                          View(await _context.Board.ToListAsync()) :
-                          Problem("Entity set 'SurfboardGrp4Context.Board'  is null.");
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            // ViewData["LengthSortParm"] = sortOrder == "Length" ? "length_desc" : "Length";
+            ViewData["LengthSortParm"] = String.IsNullOrEmpty(sortOrder) ? "length_desc" : "";
+            ViewData["TypeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "type_desc" : "";
+
+            var boards = from b in _context.Board
+                           select b;
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    boards = boards.OrderByDescending(s => s.Name);
+                    break;
+                case "length_desc":
+                    boards = boards.OrderBy(s => s.Length);
+                    break;
+                case "type_desc":
+                    boards = boards.OrderByDescending(s => s.Type);
+                    break;
+                default:
+                    break;
+            }
+
+            return View(await boards.AsNoTracking().ToListAsync());
         }
 
         // GET: Boards/Details/5

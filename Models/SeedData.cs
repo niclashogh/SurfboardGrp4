@@ -31,7 +31,6 @@ namespace SurfboardGrp4.Models
                         Type = "Shortboard",
                         Price = 565,
                         Equipment = "",
-                        ImgUrl = ""
                     },
 
                     new Board
@@ -44,7 +43,6 @@ namespace SurfboardGrp4.Models
                         Type = "Funboard",
                         Price = 685,
                         Equipment = "",
-                        ImgUrl = ""
                     },
 
                     new Board
@@ -57,7 +55,6 @@ namespace SurfboardGrp4.Models
                         Type = "Funboard",
                         Price = 695,
                         Equipment = "",
-                        ImgUrl = ""
                     },
 
                     new Board
@@ -70,7 +67,6 @@ namespace SurfboardGrp4.Models
                         Type = "Fish",
                         Price = 645,
                         Equipment = "",
-                        ImgUrl = ""
                     },
 
 
@@ -84,7 +80,6 @@ namespace SurfboardGrp4.Models
                         Type = "Longboard",
                         Price = 895,
                         Equipment = "",
-                        ImgUrl = ""
                     },
 
                     new Board
@@ -97,7 +92,6 @@ namespace SurfboardGrp4.Models
                         Type = "Shortboard",
                         Price = 645,
                         Equipment = "",
-                        ImgUrl = ""
                     },
 
 
@@ -111,7 +105,6 @@ namespace SurfboardGrp4.Models
                         Type = "Longboard",
                         Price = 1025,
                         Equipment = "",
-                        ImgUrl = ""
                     },
 
                     new Board
@@ -124,7 +117,6 @@ namespace SurfboardGrp4.Models
                         Type = "SUB",
                         Price = 854,
                         Equipment = "Paddle",
-                        ImgUrl = ""
                     },
 
                     new Board
@@ -137,7 +129,6 @@ namespace SurfboardGrp4.Models
                         Type = "SUB",
                         Price = 611,
                         Equipment = "Fin, Paddle, Pump, Leash",
-                        ImgUrl = ""
                     },
 
                     new Board
@@ -150,7 +141,6 @@ namespace SurfboardGrp4.Models
                         Type = "SUB",
                         Price = 1304,
                         Equipment = "Fin, Paddle, Pump, Leash",
-                        ImgUrl = ""
                     }
 
 

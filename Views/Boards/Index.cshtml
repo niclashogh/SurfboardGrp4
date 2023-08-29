@@ -37,9 +37,8 @@
                 @Html.DisplayNameFor(model => model.Equipment)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImgUrl)
+                @Html.DisplayNameFor(model => model.ImageUrls)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -69,9 +68,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Equipment)
             </td>
-            <td>
-                <img src="@item?.ImgUrl" class="img-fluid td-img"/>
-            </td>
+                <td>
+                    @if (item.ImageUrls != null && item.ImageUrls.Count > 0)
+                    {
+                        <img src="@item.ImageUrls[0]" />
+                    }
+                    else
+                    {
+                        <span>No image available</span>
+                    }
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-primary" role="button">Edit</a>
                 <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-secondary" role="button">Details</a>
@@ -81,3 +87,4 @@
 }
     </tbody>
 </table>
+<a href="c:\users\bruger\documents\code\hjemmesider\surfboardgrp4\views\boards\index.cshtml">c:\users\bruger\documents\code\hjemmesider\surfboardgrp4\views\boards\index.cshtml</a>

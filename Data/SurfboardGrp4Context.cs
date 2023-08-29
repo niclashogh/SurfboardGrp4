@@ -15,5 +15,15 @@ namespace SurfboardGrp4.Data
         }
 
         public DbSet<SurfboardGrp4.Models.Board> Board { get; set; } = default!;
+
+        // this method is called when Entity Framework Core is building the database model
+        // it allows configuration when mapping between C# classes and database tables
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // configure ImageUrls as a non-mapped property
+            modelBuilder.Entity<Board>().Ignore(b => b.ImageUrls);
+        }
     }
 }

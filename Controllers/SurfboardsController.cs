@@ -25,16 +25,16 @@ namespace mvc_surfboard.Controllers
         public async Task<IActionResult> Index()
         {
             return _context.Surfboard != null ?
-                        View("Catalog", await _context.Surfboard.ToListAsync()) :
+                        View(await _context.Surfboard.ToListAsync()) :
                         Problem("Entity set 'mvc_surfboardContext.Surfboard'  is null.");
         }
 
         // GET: Surfboards
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Table()
+        public async Task<IActionResult> List()
         {
             return _context.Surfboard != null ?
-                        View("Table", await _context.Surfboard.ToListAsync()) :
+                        View("List", await _context.Surfboard.ToListAsync()) :
                         Problem("Entity set 'mvc_surfboardContext.Surfboard'  is null.");
         }
 

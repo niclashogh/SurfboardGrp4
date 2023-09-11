@@ -1,0 +1,34 @@
+﻿@model IEnumerable<mvc_surfboard.Models.Surfboard>
+
+@{
+    ViewData["Title"] = "Udlejning";
+}
+
+<div class="container">
+    <h1>Udlejning</h1>
+
+       <div class="app-surfboard-grid">
+        @foreach (var item in Model)
+        {
+                <div class="card">
+                    @if (!string.IsNullOrEmpty(item?.ImgUrl))
+                    {
+                        <img src="@item.ImgUrl" class="app-surfboard-logo" alt="Surfboard Image" />
+                    }
+                    else
+                    {
+                        <img src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" class="app-surfboard-logo" alt="No Image" />
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">
+                            @item.Price DKK<br />
+                        </p>
+                    </div>
+                    <div class="card-footer text-right">
+                        <a asp-action="Rent" asp-route-id="@item.Id" class="btn btn-primary">Udlej</a>
+                    </div>
+                </div>
+        }
+       </div>
+</div>

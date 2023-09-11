@@ -1,27 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using SurfboardGrp4.Data;
-using System;
-using System.Linq;
+using mvc_surfboard.Data;
 
-namespace SurfboardGrp4.Models
+namespace mvc_surfboard.Models
 {
     public static class SeedData
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new SurfboardGrp4Context(
+            using (var context = new mvc_surfboardContext(
                 serviceProvider.GetRequiredService<
-                    DbContextOptions<SurfboardGrp4Context>>()))
+                    DbContextOptions<mvc_surfboardContext>>()))
             {
-                // Look for any movies.
-                if (context.Board.Any())
+                // Look for any surfboards
+                if (context.Surfboard.Any())
                 {
                     return;   // DB has been seeded
                 }
 
-                context.Board.AddRange(
-                    new Board
+                context.Surfboard.AddRange(
+                    new Surfboard
                     {
                         Name = "The Minilog",
                         Length = 6,
@@ -34,7 +31,7 @@ namespace SurfboardGrp4.Models
                         ImgUrl = ""
                     },
 
-                    new Board
+                    new Surfboard
                     {
                         Name = "The Wide Glider",
                         Length = 7.1,
@@ -47,7 +44,7 @@ namespace SurfboardGrp4.Models
                         ImgUrl = ""
                     },
 
-                    new Board
+                    new Surfboard
                     {
                         Name = "The Golden Ratio",
                         Length = 6.3,
@@ -60,7 +57,7 @@ namespace SurfboardGrp4.Models
                         ImgUrl = ""
                     },
 
-                    new Board
+                    new Surfboard
                     {
                         Name = "Mahi Mahi",
                         Length = 5.4,
@@ -73,8 +70,7 @@ namespace SurfboardGrp4.Models
                         ImgUrl = ""
                     },
 
-
-                    new Board
+                    new Surfboard
                     {
                         Name = "The Emerald Glider",
                         Length = 9.2,
@@ -87,7 +83,7 @@ namespace SurfboardGrp4.Models
                         ImgUrl = ""
                     },
 
-                    new Board
+                    new Surfboard
                     {
                         Name = "The Bomb",
                         Length = 5.5,
@@ -101,7 +97,7 @@ namespace SurfboardGrp4.Models
                     },
 
 
-                    new Board
+                    new Surfboard
                     {
                         Name = "Walden Magic",
                         Length = 9.6,
@@ -114,7 +110,7 @@ namespace SurfboardGrp4.Models
                         ImgUrl = ""
                     },
 
-                    new Board
+                    new Surfboard
                     {
                         Name = "Naish One",
                         Length = 12.6,
@@ -127,7 +123,7 @@ namespace SurfboardGrp4.Models
                         ImgUrl = ""
                     },
 
-                    new Board
+                    new Surfboard
                     {
                         Name = "Six Tourer",
                         Length = 11.6,
@@ -140,7 +136,7 @@ namespace SurfboardGrp4.Models
                         ImgUrl = ""
                     },
 
-                    new Board
+                    new Surfboard
                     {
                         Name = "Naish Maliko",
                         Length = 14,
@@ -152,8 +148,6 @@ namespace SurfboardGrp4.Models
                         Equipment = "Fin, Paddle, Pump, Leash",
                         ImgUrl = ""
                     }
-
-
                 );
                 context.SaveChanges();
             }

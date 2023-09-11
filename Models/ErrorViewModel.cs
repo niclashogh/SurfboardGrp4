@@ -1,4 +1,4 @@
-namespace SurfboardGrp4.Models
+namespace mvc_surfboard.Models
 {
     public class ErrorViewModel
     {

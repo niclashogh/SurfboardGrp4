@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SurfboardGrp4.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using mvc_surfboard.Models;
+using System.Data;
 using System.Diagnostics;
 
-namespace SurfboardGrp4.Controllers
+namespace mvc_surfboard.Controllers
 {
     public class HomeController : Controller
     {
@@ -17,7 +19,6 @@ namespace SurfboardGrp4.Controllers
         {
             return View();
         }
-
         public IActionResult Privacy()
         {
             return View();

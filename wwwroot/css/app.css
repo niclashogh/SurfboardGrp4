@@ -1,7 +1,6 @@
 .app-logo {
-    width: 50px;
+    width: 30px;
     height: auto;
-    border-radius: 100%;
 }
 
 .app-surfboard-grid {
@@ -17,7 +16,35 @@
 }
 
 @media screen and (max-width: 768px) {
-    .product-grid {
+    .app-surfboard-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+.app-user-logo {
+    width: 25px; 
+    height: 25px;
+    border: 2px solid black; 
+}
+
+.app-button {
+    background: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.app-login-form{
+    width: 100%;
+    margin: 0 auto;
+    max-width: 25rem;
+
+}
+
+.app-btn-full{
+    width: 100%;
+}
+
+.app-text{
+    color: black;
 }

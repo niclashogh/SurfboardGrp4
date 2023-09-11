@@ -13,8 +13,16 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Surfboards" asp-action="Index">
-                    <img src="https://i.pinimg.com/originals/1a/d6/ec/1ad6ec9dba82af86537148b7c3aad1f9.jpg" class="app-logo" />
+                <a 
+                    class="navbar-brand" 
+                    asp-area="" 
+                    asp-controller="Home" 
+                    asp-action="Index"
+                >
+                    <img 
+                        src="https://cdn-icons-png.flaticon.com/512/4363/4363838.png"
+                        class="app-logo" 
+                     />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +31,14 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Surfboards" asp-action="Index">Udlejning</a>
+                            <a 
+                                class="nav-link text-dark" 
+                                asp-area="" 
+                                asp-controller="Surfboards" 
+                                asp-action="Index"
+                            >
+                                Udlejning
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -42,6 +57,7 @@
             &copy; 2023 - mvc_surfboard - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

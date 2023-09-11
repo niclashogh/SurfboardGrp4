@@ -9,14 +9,12 @@
 
 
 <div class="text-center">
-
     <h1 class="display-4">Welcome
-        @if (User.IsInRole("Admin"))    
+        @if (SignInManager.IsSignedIn(User))
         {
-            <span>Admin</span>
-        } else if (User.IsInRole("User")){
-            <span>User</span>
+            <span>
+                Back, @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName!
+            </span>
         }
     </h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

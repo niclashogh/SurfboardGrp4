@@ -2,103 +2,107 @@
 @using Microsoft.AspNetCore.Identity
 
 @inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
 
 @{
-    ViewData["Title"] = "Rent";
+    ViewData["Title"] = "Lej";
 }
 
-<h1>Rent</h1>
-
 <div>
-    <h4>Surfboard</h4>
-    <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surfboard.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surfboard.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surfboard.Length)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surfboard.Length)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surfboard.Width)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surfboard.Width)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surfboard.Thickness)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surfboard.Thickness)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surfboard.Volume)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surfboard.Volume)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surfboard.Type)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surfboard.Type)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surfboard.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surfboard.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surfboard.Equipment)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surfboard.Equipment)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surfboard.ImgUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surfboard.ImgUrl)
-        </dd>
-    </dl>
-</div>
-        <form asp-action="Rent">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group d-none">
-        <label asp-for="Rental.UserId" class="control-label"></label>
-        <input asp-for="Rental.UserId" class="form-control" value=@UserManager.GetUserId(User) />
-    </div>
-    <div class="form-group d-none">
-        <label asp-for="Rental.SurfboardId" class="control-label"></label>
-        <input asp-for="Rental.SurfboardId" class="form-control" value="@Context.Request.RouteValues["id"]" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Rental.StartDate" class="control-label"></label>
-        <input asp-for="Rental.StartDate" class="form-control" value="@DateTime.Now.ToString()" />
-        <span asp-validation-for="Rental.StartDate" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Rental.EndDate" class="control-label"></label>
-        <input asp-for="Rental.EndDate" class="form-control" value="@DateTime.Now.ToString()" />
-        <span asp-validation-for="Rental.EndDate" class="text-danger"></span>
-    </div>
-    <div class="form-group d-none">
-        <label asp-for="Rental.TotalCost" class="control-label"></label>
-        <input asp-for="Rental.TotalCost" class="form-control" value="0"/>
-        <span asp-validation-for="Rental.TotalCost" class="text-danger"></span>
-    </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+        <div class="col">
+            @if (!string.IsNullOrEmpty(Model?.Surfboard.ImgUrl))
+                {
+                   <img src="@Model.Surfboard.ImgUrl" class="app-card-img" />
+                } else {
+                <img src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" class="app-card-img" alt="No Image" />
+                }
+        </div>
+        <div class="col-md-6">
+            <h1>
+                @Html.DisplayFor(model => model.Surfboard.Name)
+            </h1>
+            <h3 class="py-3">
+                DKK @Html.DisplayFor(model => model.Surfboard.Price)
+            </h3>
+            <div class="card text-bg-light mt-4">
+                <div class="card-header">
+                    Lej @Html.DisplayFor(model => model.Surfboard.Name)
+                </div>
+                <div class="card-body">
+                    <form asp-action="Rent">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group d-none">
+                            <label asp-for="Rental.UserId" class="control-label"></label>
+                            <input asp-for="Rental.UserId" class="form-control" value=@UserManager.GetUserId(User) />
+                        </div>
+                        <div class="form-group d-none">
+                            <label asp-for="Rental.SurfboardId" class="control-label"></label>
+                            <input asp-for="Rental.SurfboardId" class="form-control" value="@Context.Request.RouteValues["id"]" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Rental.StartDate" class="control-label"></label>
+                            <input asp-for="Rental.StartDate" class="form-control" value="@DateTime.Now.ToString()" />
+                            <span asp-validation-for="Rental.StartDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Rental.EndDate" class="control-label"></label>
+                            <input asp-for="Rental.EndDate" class="form-control" value="@DateTime.Now.ToString()" />
+                            <span asp-validation-for="Rental.EndDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group d-none">
+                            <label asp-for="Rental.TotalCost" class="control-label"></label>
+                            <input asp-for="Rental.TotalCost" class="form-control" value="0" />
+                            <span asp-validation-for="Rental.TotalCost" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <input type="submit" value="Book" class="btn btn-dark app-btn-full" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Book" class="btn btn-dark app-btn-full" disabled />
+                                <small class="mt-1">Du skal være logget ind for at leje.</small>
+                            }
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
-<div>
+            <hr class="my-3"/>
+            <div class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Specifikationer
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>
+                                <b>@Html.DisplayNameFor(model => model.Surfboard.Length):</b> @Html.DisplayFor(model => model.Surfboard.Length)
+                            </p>
+                            <p>
+                                <b>@Html.DisplayNameFor(model => model.Surfboard.Width):</b> @Html.DisplayFor(model => model.Surfboard.Width)
+                            </p>
+                            <p>
+                                <b>@Html.DisplayNameFor(model => model.Surfboard.Thickness):</b> @Html.DisplayFor(model => model.Surfboard.Thickness)
+                            </p>
+                            <p>
+                                <b>@Html.DisplayNameFor(model => model.Surfboard.Volume):</b> @Html.DisplayFor(model => model.Surfboard.Volume)
+                            </p>
+                            <p>
+                                <b>@Html.DisplayNameFor(model => model.Surfboard.Type):</b> @Html.DisplayFor(model => model.Surfboard.Type)
+                            </p>      
+                            <p>
+                                <b>@Html.DisplayNameFor(model => model.Surfboard.Equipment):</b> @Html.DisplayFor(model => model.Surfboard.Equipment)
+                            </p>        
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+    </dl>
     <a asp-action="Index">Back to Catalog</a>
 </div>
 

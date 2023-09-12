@@ -36,7 +36,7 @@ using (var scope = app.Services.CreateScope())
         roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
     }
 
-    // SeedData.Initialize(services); 
+    SeedData.Initialize(services); 
 }
 
 // Configure the HTTP request pipeline.
@@ -59,4 +59,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+
 app.Run();

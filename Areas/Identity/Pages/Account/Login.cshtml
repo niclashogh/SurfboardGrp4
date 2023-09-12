@@ -23,14 +23,14 @@
                             <input asp-for="Input.Password" type="password" class="form-control" autocomplete="current-password" aria-required="true" />
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
-                        <div class="form-group form-check">
+                        <div class="form-group form-check py-2">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
                             <label class="form-check-label" asp-for="Input.RememberMe">Remember me</label>
                         </div>
                         <div class="form-group">
                             <button id="login-submit" type="submit" class="btn btn-primary app-btn-full">Log in</button>
                         </div>
-                        <div class="form-group">
+                        <div class="pt-2">
                             <p class="text-sm-start">
                                 <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                             </p>

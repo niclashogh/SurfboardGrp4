@@ -28,7 +28,7 @@ namespace mvc_surfboard.Models
                         Type = "Shortboard",
                         Price = 565,
                         Equipment = "",
-                        ImgUrl = ""
+                        ImgUrl = "https://images.blue-tomato.com/is/image/bluetomato/304985477_front.jpg-sc3VZ7vW-FFI4Aqdn9Iz-SHhuWM/Lost+Glydra+7+0+Surfboard.jpg?$b8$"
                     },
 
                     new Surfboard
@@ -80,7 +80,7 @@ namespace mvc_surfboard.Models
                         Type = "Longboard",
                         Price = 895,
                         Equipment = "",
-                        ImgUrl = ""
+                        ImgUrl = "https://images.blue-tomato.com/is/image/bluetomato/304199479_front.jpg-3c-91210fWAvivUDHGWJiePAiFo/Bomber+FCS+II+5+10+Softtop+Surfboard.jpg?$b8$"
                     },
 
                     new Surfboard
@@ -107,7 +107,7 @@ namespace mvc_surfboard.Models
                         Type = "Longboard",
                         Price = 1025,
                         Equipment = "",
-                        ImgUrl = ""
+                        ImgUrl = "https://images.blue-tomato.com/is/image/bluetomato/304199483_front.jpg-DYt5uJfJyxC7tZlhbOGpyt7BFL0/Flash+Eric+Geiselman+FCS+II+5+7+Softtop+Surfboard.jpg?$b8$"
                     },
 
                     new Surfboard
@@ -120,7 +120,7 @@ namespace mvc_surfboard.Models
                         Type = "SUB",
                         Price = 854,
                         Equipment = "Paddle",
-                        ImgUrl = ""
+                        ImgUrl = "https://images.blue-tomato.com/is/image/bluetomato/304736912_front.jpg-iRn1K4X-y97gnlbsMVx8V83u7yw/Ezi+Rider+7+039+0+Surfboard.jpg?$b8$"
                     },
 
                     new Surfboard
@@ -133,7 +133,7 @@ namespace mvc_surfboard.Models
                         Type = "SUB",
                         Price = 611,
                         Equipment = "Fin, Paddle, Pump, Leash",
-                        ImgUrl = ""
+                        ImgUrl = "https://images.blue-tomato.com/is/image/bluetomato/304736908_front.jpg-H4PsPhTNHmbDVcLjz0z9rBUUEp0/Happy+Hour+Epoxy+6+6+Surfboard.jpg?$b8$"
                     },
 
                     new Surfboard

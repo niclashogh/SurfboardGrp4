@@ -14,16 +14,16 @@ namespace mvc_surfboard.Models
         public int SurfboardId { get; set; }
 
         [Required]
-        [Display(Name = "Start Date")]
+        [Display(Name = "Startdato")]
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
         [Required]
-        [Display(Name = "End Date")]
+        [Display(Name = "Slutdato")]
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
 
-        [Display(Name = "Total Cost")]
+        [Display(Name = "Total Pris")]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal TotalCost { get; set; }
 

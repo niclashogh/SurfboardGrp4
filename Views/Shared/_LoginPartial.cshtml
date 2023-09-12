@@ -19,18 +19,16 @@
                     Surfboards
                 </a>
             </li>
-            <li class="nav-item">
-                <a 
-                    class="nav-link text-dark" 
-                    asp-area=""
-                    asp-controller="Rentals" 
-                    asp-action="Index"
-                >
-                    Rentals
-                </a>
-            </li>
-            <div class="vr"></div>
         }
+        <li class="nav-item">
+            <a class="nav-link text-dark"
+           asp-area=""
+           asp-controller="Rentals"
+           asp-action="Index">
+                Bookings
+            </a>
+        </li>
+        <div class="vr"></div>
         <div class="btn-group">
             <a class="nav-link app-text dropdown-toggle align-middle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @UserManager.GetUserAsync(User).Result.FirstName

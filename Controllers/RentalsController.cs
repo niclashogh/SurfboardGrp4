@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,17 +16,35 @@ namespace mvc_surfboard.Controllers
     public class RentalsController : Controller
     {
         private readonly mvc_surfboardContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public RentalsController(mvc_surfboardContext context)
+        public RentalsController(mvc_surfboardContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Rentals
         public async Task<IActionResult> Index()
         {
-            var mvc_surfboardContext = _context.Rental.Include(r => r.Surfboard).Include(r => r.User);
-            return View(await mvc_surfboardContext.ToListAsync());
+            if (User.IsInRole("Admin"))
+            {
+                var mvc_surfboardContext = _context.Rental
+                    .Include(r => r.Surfboard)
+                    .Include(r => r.User);
+                return View(await mvc_surfboardContext.ToListAsync());
+            }
+            else
+            {
+                // if user isnt admin only return rentals the user has rented
+                var user = await _userManager.GetUserAsync(User);
+                string currentUserId = user.Id;
+                var mvc_surfboardContext = _context.Rental
+                    .Include(r => r.Surfboard)
+                    .Include(r => r.User)
+                    .Where(r => r.UserId == currentUserId);
+                return View(await mvc_surfboardContext.ToListAsync());
+            }
         }
 
         // GET: Rentals/Details/5
@@ -61,6 +80,7 @@ namespace mvc_surfboard.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("RentalId,UserId,SurfboardId,StartDate,EndDate,TotalCost")] Rental rental)
         {
             if (ModelState.IsValid)
@@ -95,6 +115,7 @@ namespace mvc_surfboard.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("RentalId,UserId,SurfboardId,StartDate,EndDate,TotalCost")] Rental rental)
         {
             if (id != rental.RentalId)

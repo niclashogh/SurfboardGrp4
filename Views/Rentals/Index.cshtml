@@ -1,17 +1,37 @@
-﻿@model IEnumerable<mvc_surfboard.Models.Rental>
+﻿@using Microsoft.AspNetCore.Identity
+
+@model IEnumerable<mvc_surfboard.Models.Rental>
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "Udlejninger";
+    ViewData["Title"] = "Bookings";
 }
 
-<h1>Udlejninger</h1>
+<h1>
+    @if (User.IsInRole("User"))
+    {
+        <span>
+            Mine
+        </span>
+    }
+    Bookings
+</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-dark">+ Create New</a>
+    </p>
+}
+
 <table class="table">
     <thead>
         <tr>
+            <th>
+                #
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
@@ -33,6 +53,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>   
+               @Html.DisplayFor(modelItem => item.RentalId)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartDate)
             </td>
@@ -49,9 +72,12 @@
                 @Html.DisplayFor(modelItem => item.Surfboard.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.RentalId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RentalId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RentalId">Delete</a>
+            @if (User.IsInRole("Admin"))
+                {
+                   <a asp-action="Edit" asp-route-id="@item.RentalId" class="btn btn-dark">Edit</a>
+                }
+                <a asp-action="Details" asp-route-id="@item.RentalId"class="btn btn-secondary">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.RentalId" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 }

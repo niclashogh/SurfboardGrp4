@@ -27,6 +27,7 @@ namespace mvc_surfboard.Models
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
+        [Display(Name = "Udstyr")]
         public string? Equipment { get; set; }
         [Display(Name = "Billede")]
         public string? ImgUrl { get; set; }

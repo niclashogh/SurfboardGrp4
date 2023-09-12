@@ -2,7 +2,7 @@
 {
     public class SurfboardRentalViewModel
     {
-        public Surfboard Surfboard { get; set; }
+        public Surfboard? Surfboard { get; set; }
         public Rental Rental { get; set; }
     }
 

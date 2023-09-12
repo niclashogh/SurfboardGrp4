@@ -24,9 +24,11 @@ namespace mvc_surfboard.Controllers
         // GET: Surfboards
         public async Task<IActionResult> Index()
         {
-            return _context.Surfboard != null ?
-                        View(await _context.Surfboard.ToListAsync()) :
-                        Problem("Entity set 'mvc_surfboardContext.Surfboard'  is null.");
+            var validSurfboards = await _context.Surfboard
+                .Where(surfboard => !surfboard.Rentals.Any())
+                .ToListAsync();
+
+            return View(validSurfboards);
         }
 
         // GET: Surfboards
@@ -196,15 +198,10 @@ namespace mvc_surfboard.Controllers
 
             if (ModelState.IsValid)
             {
-                viewModel.Rental.UserId = "fabb9505-7014-4305-9d88-6988b4774ad2";
-                viewModel.Rental.SurfboardId = id;
-                viewModel.Rental.TotalCost = 99;
-
                 _context.Add(viewModel.Rental);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-           var errors = ModelState.Values.SelectMany(v => v.Errors); // see errors
 
             return View(viewModel);
         }

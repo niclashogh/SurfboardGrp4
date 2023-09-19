@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using mvc_surfboard.Data;
 
@@ -11,9 +12,11 @@ using mvc_surfboard.Data;
 namespace mvc_surfboard.Migrations
 {
     [DbContext(typeof(mvc_surfboardContext))]
-    partial class mvc_surfboardContextModelSnapshot : ModelSnapshot
+    [Migration("20230919081518_initMe")]
+    partial class initMe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,12 +245,6 @@ namespace mvc_surfboard.Migrations
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");

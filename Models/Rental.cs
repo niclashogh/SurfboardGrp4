@@ -31,7 +31,10 @@ namespace mvc_surfboard.Models
         [ForeignKey("UserId")]
         public ApplicationUser? User { get; set; }
         [ForeignKey("SurfboardId")]
-        public Surfboard? Surfboard { get; set; } 
+        public Surfboard? Surfboard { get; set; }
+
+        [Timestamp, Required]
+        public byte[] RowVersion { get; set; }
 
     }
 }

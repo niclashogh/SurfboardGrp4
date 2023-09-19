@@ -81,7 +81,7 @@ namespace mvc_surfboard.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("RentalId,UserId,SurfboardId,StartDate,EndDate,TotalCost")] Rental rental)
+        public async Task<IActionResult> Create([Bind("RentalId,UserId,SurfboardId,StartDate,EndDate,TotalCost,RowVersion")] Rental rental)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +116,7 @@ namespace mvc_surfboard.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("RentalId,UserId,SurfboardId,StartDate,EndDate,TotalCost")] Rental rental)
+        public async Task<IActionResult> Edit(int id, [Bind("RentalId,UserId,SurfboardId,StartDate,EndDate,TotalCost,RowVersion")] Rental rental)
         {
             if (id != rental.RentalId)
             {

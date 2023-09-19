@@ -235,8 +235,31 @@ namespace mvc_surfboard.Controllers
 
             if (ModelState.IsValid)
             {
-                // some logic to calculate price based off date period
-                _context.Add(viewModel.Rental);
+                //try
+                //{
+                //    // some logic to calculate price based off date period
+                //    _context.Add(viewModel.Rental);
+                //    await _context.SaveChangesAsync();
+                //    return RedirectToAction(nameof(Index));
+                //}
+                //catch (DbUpdateConcurrencyException uce)
+                //{
+                //    var entry = uce.Entries.Single();
+                //    var databaseEntry = entry.GetDatabaseValues();
+                //    if (databaseEntry == null)
+                //    {
+                //        ModelState.AddModelError(string.Empty, "Unable to rent board");
+                //    }
+                //    else
+                //    {
+                //        ModelState.AddModelError(string.Empty, "Already rented out");
+                //        var entity = (Rental)databaseEntry.ToObject();
+                //        entity.RowVersion = entity.RowVersion;
+                //    }
+                //}
+
+                //some logic to calculate price based off date period
+                    _context.Add(viewModel.Rental);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

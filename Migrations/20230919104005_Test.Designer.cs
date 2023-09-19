@@ -12,8 +12,8 @@ using mvc_surfboard.Data;
 namespace mvc_surfboard.Migrations
 {
     [DbContext(typeof(mvc_surfboardContext))]
-    [Migration("20230919081518_initMe")]
-    partial class initMe
+    [Migration("20230919104005_Test")]
+    partial class Test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -246,6 +246,12 @@ namespace mvc_surfboard.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -291,6 +297,12 @@ namespace mvc_surfboard.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 2)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.Property<double>("Thickness")
                         .HasColumnType("float");

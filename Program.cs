@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using mvc_surfboard.Data;
 using mvc_surfboard.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<mvc_surfboardContext>(options =>
@@ -16,6 +18,17 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+var supportedCultures = new[]
+            {
+                new CultureInfo("en-US"),
+            };
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("en-US"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
 
 using (var scope = app.Services.CreateScope())
 {

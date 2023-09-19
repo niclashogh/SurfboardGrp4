@@ -33,5 +33,8 @@ namespace mvc_surfboard.Models
         public string? ImgUrl { get; set; }
         // public bool isAvalaible {  get; set; }
         public ICollection<Rental>? Rentals { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

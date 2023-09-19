@@ -9,15 +9,16 @@
 }
 
 <div>
+    @* <p class="error">@Html.ValidationMessage("Row")</p> *@
     <dl class="row">
-        @* <div class="col">
+        <div class="col">
             @if (!string.IsNullOrEmpty(Model?.Surfboard.ImgUrl))
                 {
                    <img src="@Model.Surfboard.ImgUrl" class="app-card-img" />
                 } else {
                 <img src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" class="app-card-img" alt="No Image" />
                 }
-        </div> *@
+        </div>
         <div class="col-md-6">
             <h1>
                 @Html.DisplayFor(model => model.Surfboard.Name)
@@ -54,6 +55,10 @@
                             <label asp-for="Rental.TotalCost" class="control-label"></label>
                             <input asp-for="Rental.TotalCost" class="form-control" value=@Model.Surfboard.Price />
                             <span asp-validation-for="Rental.TotalCost" class="text-danger"></span>
+                        </div>
+                        <div class="form-group d-none">
+                            <label asp-for="Rental.RowVersion" class="control-label"></label>
+                            <input asp-for="Rental.RowVersion" class="form-control" value=0101 />
                         </div>
                         <div class="form-group mt-2">
                             @if (SignInManager.IsSignedIn(User))

@@ -33,7 +33,7 @@ namespace mvc_surfboard.Models
         [ForeignKey("SurfboardId")]
         public Surfboard? Surfboard { get; set; }
 
-        [Timestamp, Required]
+        [Timestamp]
         public byte[] RowVersion { get; set; }
 
     }

@@ -120,38 +120,137 @@ namespace mvc_surfboard.Controllers
             return View(surfboard);
         }
 
+        #region lll
         // POST: Surfboards/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Edit(int? id, byte[] rowVersion)
+        //{
+        //    string fieldsToBind = "Id,Name,Length,Width,Thickness,Volume,Type,Price,Equipment,ImgUrl,RowVersion";
+
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var departmentToUpdate = await _context.Surfboard.FindAsync(id);
+        //    if (departmentToUpdate == null)
+        //    {
+        //        Surfboard deletedDepartment = new Surfboard();
+        //        TryUpdateModelAsync(deletedDepartment, fieldsToBind);
+        //        ModelState.AddModelError(string.Empty,
+        //            "Unable to save changes. The department was deleted by another user.");
+        //        return View(deletedDepartment);
+        //    }
+
+        //    if (await TryUpdateModelAsync(departmentToUpdate, fieldsToBind))
+        //    {
+        //        try
+        //        {
+        //            _context.Surfboard.Entry(departmentToUpdate).OriginalValues["RowVersion"] = rowVersion;
+        //            _context.Update(departmentToUpdate);
+        //            await _context.SaveChangesAsync();
+
+        //            return RedirectToAction("Index");
+        //        }
+        //        catch (DbUpdateConcurrencyException ex)
+        //        {
+        //            var entry = ex.Entries.Single();
+        //            var clientValues = (Surfboard)entry.Entity;
+        //            var databaseEntry = entry.GetDatabaseValues();
+        //            if (databaseEntry == null)
+        //            {
+        //                ModelState.AddModelError(string.Empty,
+        //                    "Unable to save changes. The department was deleted by another user.");
+        //            }
+        //            else
+        //            {
+        //                var databaseValues = (Surfboard)databaseEntry.ToObject();
+
+        //                if (databaseValues.Id != clientValues.Id)
+        //                    ModelState.AddModelError("Id", "Current value: "
+        //                        + databaseValues.Id);
+
+        //                if (databaseValues.Name != clientValues.Name)
+        //                    ModelState.AddModelError("Name", "Current value: "
+        //                        + databaseValues.Name);
+
+        //                if (databaseValues.Length != clientValues.Length)
+        //                    ModelState.AddModelError("Lenght", "Current value: "
+        //                        + databaseValues.Length);
+
+        //                if (databaseValues.Width != clientValues.Width)
+        //                    ModelState.AddModelError("Width", "Current value: "
+        //                        + databaseValues.Width);
+
+        //                if (databaseValues.Thickness != clientValues.Thickness)
+        //                    ModelState.AddModelError("Thickness", "Current value: "
+        //                        + databaseValues.Thickness);
+
+        //                if (databaseValues.Volume != clientValues.Volume)
+        //                    ModelState.AddModelError("Volume", "Current value: "
+        //                        + databaseValues.Volume);
+
+        //                if (databaseValues.Type != clientValues.Type)
+        //                    ModelState.AddModelError("Type", "Current value: "
+        //                        + databaseValues.Type);
+
+        //                if (databaseValues.Price != clientValues.Price)
+        //                    ModelState.AddModelError("Price", "Current value: "
+        //                        + databaseValues.Price);
+
+        //                if (databaseValues.ImgUrl != clientValues.ImgUrl)
+        //                    ModelState.AddModelError("ImgUrl", "Current value: "
+        //                        + databaseValues.ImgUrl);
+
+        //                if (databaseValues.RowVersion != clientValues.RowVersion)
+        //                    ModelState.AddModelError("RowVersion", "Current value: "
+        //                        + databaseValues.RowVersion);
+
+        //                ModelState.AddModelError(string.Empty, "The record you attempted to edit "
+        //                    + "was modified by another user after you got the original value. The "
+        //                    + "edit operation was canceled and the current values in the database "
+        //                    + "have been displayed. If you still want to edit this record, click "
+        //                    + "the Save button again. Otherwise click the Back to List hyperlink.");
+        //                departmentToUpdate.RowVersion = databaseValues.RowVersion;
+        //            }
+        //        }
+        //        catch (RetryLimitExceededException /* dex */)
+        //        {
+        //            //Log the error (uncomment dex variable name and add a line here to write a log.)
+        //            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+        //        }
+        //    }
+        //    return View(departmentToUpdate);
+        //}
+        #endregion
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int? id, byte[] rowVersion)
         {
-            string fieldsToBind = "Id,Name,Length,Width,Thickness,Volume,Type,Price,Equipment,ImgUrl,RowVersion";
+            //string fieldsToBind = "Id,Name,Length,Width,Thickness,Volume,Type,Price,Equipment,ImgUrl,RowVersion";
 
             if (id == null)
             {
                 return NotFound();
             }
 
-            var departmentToUpdate = await _context.Surfboard.FindAsync(id);
-            if (departmentToUpdate == null)
+            var surfboardToUpdate = await _context.Surfboard.FindAsync(id);
+            if (surfboardToUpdate == null)
             {
-                Surfboard deletedDepartment = new Surfboard();
-                TryUpdateModelAsync(deletedDepartment, fieldsToBind);
-                ModelState.AddModelError(string.Empty,
-                    "Unable to save changes. The department was deleted by another user.");
-                return View(deletedDepartment);
+                return NotFound();
             }
 
-            if (await TryUpdateModelAsync(departmentToUpdate, fieldsToBind))
+            if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Surfboard.Entry(departmentToUpdate).OriginalValues["RowVersion"] = rowVersion;
-                    _context.Update(departmentToUpdate);
+                    _context.Entry(surfboardToUpdate).OriginalValues["RowVersion"] = rowVersion;
+                    _context.Update(surfboardToUpdate);
                     await _context.SaveChangesAsync();
-
                     return RedirectToAction("Index");
                 }
                 catch (DbUpdateConcurrencyException ex)
@@ -161,65 +260,39 @@ namespace mvc_surfboard.Controllers
                     var databaseEntry = entry.GetDatabaseValues();
                     if (databaseEntry == null)
                     {
-                        ModelState.AddModelError(string.Empty,
-                            "Unable to save changes. The department was deleted by another user.");
+                        ModelState.AddModelError(string.Empty, "The record you attempted to edit was deleted by another user.");
                     }
                     else
                     {
                         var databaseValues = (Surfboard)databaseEntry.ToObject();
 
-                        //if (databaseValues.Id != clientValues.Id)
-                        //    ModelState.AddModelError("Id", "Current value: "
-                        //        + databaseValues.Id);
+                        if (databaseValues.RowVersion.SequenceEqual(clientValues.RowVersion))
+                        {
+                            // Concurrency conflict occurred, but the RowVersion values match.
+                            // This typically means another user updated the same data.
+                            ModelState.AddModelError(string.Empty, "The record you attempted to edit was modified by another user.");
+                        }
+                        else
+                        {
+                            // Concurrency conflict with RowVersion mismatch.
+                            // You can add specific field-level error messages if needed.
+                            ModelState.AddModelError("RowVersion", "The record you attempted to edit was modified by another user.");
+                        }
 
-                        if (databaseValues.Name != clientValues.Name)
-                            ModelState.AddModelError("Name", "Current value: "
-                                + String.Format("{0:c}", databaseValues.Name));
-
-                        if (databaseValues.Length != clientValues.Length)
-                            ModelState.AddModelError("Lenght", "Current value: "
-                                + String.Format("{0:c}", databaseValues.Length));
-
-                        if (databaseValues.Width != clientValues.Width)
-                            ModelState.AddModelError("Width", "Current value: "
-                                + String.Format("{0:c}", databaseValues.Width));
-
-                        if (databaseValues.Thickness != clientValues.Thickness)
-                            ModelState.AddModelError("Thickness", "Current value: "
-                                + String.Format("{0:c}", databaseValues.Thickness));
-
-                        if (databaseValues.Volume != clientValues.Volume)
-                            ModelState.AddModelError("Volume", "Current value: "
-                                + String.Format("{0:c}", databaseValues.Volume));
-
-                        if (databaseValues.Type != clientValues.Type)
-                            ModelState.AddModelError("Type", "Current value: "
-                                + databaseValues.Type);
-
-                        if (databaseValues.Price != clientValues.Price)
-                            ModelState.AddModelError("Price", "Current value: "
-                                + String.Format("{0:c}", databaseValues.Price));
-
-                        if (databaseValues.ImgUrl != clientValues.ImgUrl)
-                            ModelState.AddModelError("ImgUrl", "Current value: "
-                                + databaseValues.ImgUrl);
-
-                        ModelState.AddModelError(string.Empty, "The record you attempted to edit "
-                            + "was modified by another user after you got the original value. The "
-                            + "edit operation was canceled and the current values in the database "
-                            + "have been displayed. If you still want to edit this record, click "
-                            + "the Save button again. Otherwise click the Back to List hyperlink.");
-                        departmentToUpdate.RowVersion = databaseValues.RowVersion;
+                        // Update the RowVersion value in the model to the latest value from the database.
+                        surfboardToUpdate.RowVersion = databaseValues.RowVersion;
                     }
                 }
-                catch (RetryLimitExceededException /* dex */)
+                catch (Exception ex)
                 {
-                    //Log the error (uncomment dex variable name and add a line here to write a log.)
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    // Handle other exceptions (e.g., validation errors, database errors)
+                    ModelState.AddModelError(string.Empty, "An error occurred while saving changes.");
                 }
             }
-            return View(departmentToUpdate);
+
+            return View(surfboardToUpdate);
         }
+
 
         // GET: Surfboards/Delete/5
         [Authorize(Roles = "Admin")]

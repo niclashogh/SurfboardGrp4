@@ -24,6 +24,7 @@ namespace mvc_surfboard.Controllers
             _context = context;
         }
 
+        #region Index
         // GET: Surfboards
         public async Task<IActionResult> Index()
         {
@@ -33,7 +34,9 @@ namespace mvc_surfboard.Controllers
 
             return View(validSurfboards);
         }
+        #endregion
 
+        #region List
         // GET: Surfboards
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> List(
@@ -78,7 +81,9 @@ namespace mvc_surfboard.Controllers
             int pageSize = 5;
             return View(await PaginatedList<Surfboard>.CreateAsync(boards.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
+        #endregion
 
+        #region Create
         [Authorize(Roles = "Admin")]
         // GET: Surfboards/Create
         public IActionResult Create()
@@ -102,7 +107,9 @@ namespace mvc_surfboard.Controllers
             }
             return View(surfboard);
         }
+        #endregion
 
+        #region Edit
         // GET: Surfboards/Edit/5
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
@@ -120,7 +127,7 @@ namespace mvc_surfboard.Controllers
             return View(surfboard);
         }
 
-        #region lll
+        #region Out-commented
         // POST: Surfboards/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -292,8 +299,9 @@ namespace mvc_surfboard.Controllers
 
             return View(surfboardToUpdate);
         }
+        #endregion
 
-
+        #region Delete
         // GET: Surfboards/Delete/5
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
@@ -332,12 +340,16 @@ namespace mvc_surfboard.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        #endregion
 
+        #region Bool Exists
         private bool SurfboardExists(int id)
         {
             return (_context.Surfboard?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+        #endregion
 
+        #region Rent
         // GET: Surfboards/Rent/5
         public async Task<IActionResult> Rent(int? id)
         {
@@ -397,5 +409,6 @@ namespace mvc_surfboard.Controllers
             }
             return View(viewModel);
         }
+        #endregion
     }
 }

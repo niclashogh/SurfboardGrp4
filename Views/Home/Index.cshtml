@@ -13,7 +13,7 @@
         @if (SignInManager.IsSignedIn(User))
         {
             <span>
-                Back, @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName!
+                Back, @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName! (@UserManager.GetUserAsync(User).Result.Id)
             </span>
         }
     </h1>

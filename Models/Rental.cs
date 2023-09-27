@@ -25,6 +25,7 @@ namespace mvc_surfboard.Models
 
         [Display(Name = "Total Pris")]
         [Column(TypeName = "decimal(18, 2)")]
+        [Required]
         public decimal TotalCost { get; set; }
 
         // foreign key attributes specify navigation properties
@@ -34,7 +35,7 @@ namespace mvc_surfboard.Models
         public Surfboard? Surfboard { get; set; }
 
         [Timestamp]
-        public byte[] RowVersion { get; set; }
+        public byte[]? RowVersion { get; set; }
 
     }
 }

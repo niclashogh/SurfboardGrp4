@@ -251,7 +251,7 @@ namespace mvc_surfboard.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) //Not valid bc of RowVersion
             {
                 try
                 {

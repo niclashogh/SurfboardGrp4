@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,19 @@ namespace mvc_surfboard.Controllers
                 .ToListAsync();
 
             return View(validSurfboards);
+        }
+        #endregion
+
+        #region Api (Krav 5)
+        [Route("Api")]
+        public async Task<object> ApiCall()
+        {
+            var validSurfboards = await _context.Surfboard
+                .Where(surfboard => !surfboard.Rentals.Any())
+                .ToListAsync();
+
+            var jsonSerialized = JsonSerializer.Serialize(validSurfboards);
+            return jsonSerialized;
         }
         #endregion
 
@@ -408,6 +422,30 @@ namespace mvc_surfboard.Controllers
 
             }
             return View(viewModel);
+        }
+
+        [HttpPost("Api/Rent/{id?}")]
+        public async Task<object> RentFromApi([FromQuery] int id, [FromBody] SurfboardRentalViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // some logic to calculate price based off date period
+                bool rentalExists = await _context.Rental.AnyAsync(rental => rental.SurfboardId == id);
+
+                if (!rentalExists)
+                {
+                    _context.Add(viewModel.Rental);
+                    await _context.SaveChangesAsync();
+                    return JsonSerializer.Serialize(viewModel);
+                }
+                else
+                {
+                    ModelState.AddModelError("Row", "Board already rented out");
+                    return BadRequest();
+                }
+            }
+
+            return NotFound();
         }
         #endregion
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -24,6 +25,7 @@ namespace mvc_surfboard.Controllers
             _userManager = userManager;
         }
 
+        #region Index
         // GET: Rentals
         public async Task<IActionResult> Index()
         {
@@ -46,7 +48,41 @@ namespace mvc_surfboard.Controllers
                 return View(await mvc_surfboardContext.ToListAsync());
             }
         }
+        #endregion
 
+        #region Api (Krav 5)
+        [Route("Rentals/Api")]
+        public async Task<object> RentalApi()
+        {
+            var jsonSerialized = "";
+
+            if (User.IsInRole("Admin"))
+            {
+                var mvc_surfboardContext = _context.Rental
+                    .Include(r => r.Surfboard)
+                    .Include(r => r.User);
+
+                jsonSerialized = JsonSerializer.Serialize(mvc_surfboardContext);
+
+            }
+            else
+            {
+                // if user isnt admin only return rentals the user has rented
+                var user = await _userManager.GetUserAsync(User);
+                string currentUserId = user.Id;
+                var mvc_surfboardContext = _context.Rental
+                    .Include(r => r.Surfboard)
+                    .Include(r => r.User)
+                    .Where(r => r.UserId == currentUserId);
+
+                jsonSerialized = JsonSerializer.Serialize(mvc_surfboardContext);
+            }
+
+            return jsonSerialized;
+        }
+        #endregion
+
+        #region Details
         // GET: Rentals/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -66,7 +102,9 @@ namespace mvc_surfboard.Controllers
 
             return View(rental);
         }
+        #endregion
 
+        #region Create
         // GET: Rentals/Create
         public IActionResult Create()
         {
@@ -91,7 +129,9 @@ namespace mvc_surfboard.Controllers
             }
             return View(rental);
         }
+        #endregion
 
+        #region Edit
         // GET: Rentals/Edit/5
         public async Task   <IActionResult> Edit(int? id)
         {
@@ -147,7 +187,9 @@ namespace mvc_surfboard.Controllers
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", rental.UserId);
             return View(rental);
         }
+        #endregion
 
+        #region Delete
         // GET: Rentals/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -186,6 +228,7 @@ namespace mvc_surfboard.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        #endregion
 
         private bool RentalExists(int id)
         {

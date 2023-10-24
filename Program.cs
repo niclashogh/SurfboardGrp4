@@ -5,6 +5,7 @@ using mvc_surfboard.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using mvc_surfboard.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<mvc_surfboardContext>(options =>
@@ -16,6 +17,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<ApiService>();
+//builder.Services.AddHttpClient<IHttpClientFactory>();
 
 var app = builder.Build();
 
@@ -48,6 +52,11 @@ using (var scope = app.Services.CreateScope())
     {
         roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
     }
+
+    //if (!roleManager.RoleExistsAsync("Guest").Result)
+    //{
+    //    roleManager.CreateAsync(new IdentityRole("Guest")).Wait();
+    //}
 
     SeedData.Initialize(services); 
 }

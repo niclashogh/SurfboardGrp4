@@ -232,6 +232,16 @@ namespace mvc_surfboard.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("mvc_surfboard.Models.Guest", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("Guest");
+                });
+
             modelBuilder.Entity("mvc_surfboard.Models.Rental", b =>
                 {
                     b.Property<int>("RentalId")
@@ -243,9 +253,11 @@ namespace mvc_surfboard.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("GuestEmail")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
-                        .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
@@ -259,10 +271,11 @@ namespace mvc_surfboard.Migrations
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("RentalId");
+
+                    b.HasIndex("GuestEmail");
 
                     b.HasIndex("SurfboardId");
 
@@ -372,6 +385,10 @@ namespace mvc_surfboard.Migrations
 
             modelBuilder.Entity("mvc_surfboard.Models.Rental", b =>
                 {
+                    b.HasOne("mvc_surfboard.Models.Guest", "Guest")
+                        .WithMany("Rentals")
+                        .HasForeignKey("GuestEmail");
+
                     b.HasOne("mvc_surfboard.Models.Surfboard", "Surfboard")
                         .WithMany("Rentals")
                         .HasForeignKey("SurfboardId")
@@ -380,9 +397,9 @@ namespace mvc_surfboard.Migrations
 
                     b.HasOne("mvc_surfboard.Models.ApplicationUser", "User")
                         .WithMany("Rentals")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Guest");
 
                     b.Navigation("Surfboard");
 
@@ -390,6 +407,11 @@ namespace mvc_surfboard.Migrations
                 });
 
             modelBuilder.Entity("mvc_surfboard.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Rentals");
+                });
+
+            modelBuilder.Entity("mvc_surfboard.Models.Guest", b =>
                 {
                     b.Navigation("Rentals");
                 });

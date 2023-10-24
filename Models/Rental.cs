@@ -7,8 +7,8 @@ namespace mvc_surfboard.Models
     public class Rental
     {
         public int RentalId { get; set; }
-        [Required]
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
+        public string? GuestEmail { get; set; }
 
         [Required]
         public int SurfboardId { get; set; }
@@ -31,6 +31,9 @@ namespace mvc_surfboard.Models
         // foreign key attributes specify navigation properties
         [ForeignKey("UserId")]
         public ApplicationUser? User { get; set; }
+        [ForeignKey("GuestEmail")]
+        public Guest? Guest { get; set; }
+
         [ForeignKey("SurfboardId")]
         public Surfboard? Surfboard { get; set; }
 

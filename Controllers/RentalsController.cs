@@ -24,6 +24,7 @@ namespace mvc_surfboard.Controllers
             _userManager = userManager;
         }
 
+        #region Index
         // GET: Rentals
         public async Task<IActionResult> Index()
         {
@@ -46,7 +47,9 @@ namespace mvc_surfboard.Controllers
                 return View(await mvc_surfboardContext.ToListAsync());
             }
         }
+        #endregion
 
+        #region Details
         // GET: Rentals/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -66,7 +69,9 @@ namespace mvc_surfboard.Controllers
 
             return View(rental);
         }
+        #endregion
 
+        #region Create
         // GET: Rentals/Create
         public IActionResult Create()
         {
@@ -81,7 +86,7 @@ namespace mvc_surfboard.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("RentalId,UserId,SurfboardId,StartDate,EndDate,TotalCost,RowVersion")] Rental rental)
+        public async Task<IActionResult> Create([Bind("RentalId,SurfboardId,StartDate,EndDate,TotalCost,RowVersion")] Rental rental)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +96,9 @@ namespace mvc_surfboard.Controllers
             }
             return View(rental);
         }
+        #endregion
 
+        #region Edit
         // GET: Rentals/Edit/5
         public async Task   <IActionResult> Edit(int? id)
         {
@@ -116,7 +123,7 @@ namespace mvc_surfboard.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("RentalId,UserId,SurfboardId,StartDate,EndDate,TotalCost,RowVersion")] Rental rental)
+        public async Task<IActionResult> Edit(int id, [Bind("RentalId,SurfboardId,StartDate,EndDate,TotalCost,RowVersion")] Rental rental)
         {
             if (id != rental.RentalId)
             {
@@ -147,7 +154,9 @@ namespace mvc_surfboard.Controllers
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", rental.UserId);
             return View(rental);
         }
+        #endregion
 
+        #region Delete
         // GET: Rentals/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -186,6 +195,7 @@ namespace mvc_surfboard.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        #endregion
 
         private bool RentalExists(int id)
         {

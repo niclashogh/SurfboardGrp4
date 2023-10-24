@@ -33,10 +33,21 @@
                 <div class="card-body">
                     <form asp-action="Rent">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group d-none">
-                            <label asp-for="Rental.UserId" class="control-label"></label>
-                            <input asp-for="Rental.UserId" class="form-control" value=@UserManager.GetUserId(User) />
-                        </div>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <div class="form-group d-none">
+                                <label asp-for="Rental.UserId" class="control-label"></label>
+                                <input asp-for="Rental.UserId" class="form-control" value=@UserManager.GetUserId(User) />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <label asp-for="Rental.Guest.Email" class="control-label">Email</label>
+                                <input asp-for="Rental.Guest.Email" class="form-control"/>
+                            </div>
+                        }
+
                         <div class="form-group d-none">
                             <label asp-for="Rental.SurfboardId" class="control-label"></label>
                             <input asp-for="Rental.SurfboardId" class="form-control" value="@Context.Request.RouteValues["id"]" />
@@ -61,7 +72,9 @@
                             <input asp-for="Rental.RowVersion" class="form-control" value=0101 />
                         </div>
                         <div class="form-group mt-2">
-                            @if (SignInManager.IsSignedIn(User))
+                            <input type="submit" value="Book" class="btn btn-dark app-btn-full" />
+
+                            @* @if (SignInManager.IsSignedIn(User))
                             {
                                 <input type="submit" value="Book" class="btn btn-dark app-btn-full" />
                             }
@@ -69,7 +82,7 @@
                             {
                                 <input type="submit" value="Book" class="btn btn-dark app-btn-full" disabled />
                                 <small class="mt-1">Du skal være logget ind for at leje.</small>
-                            }
+                            } *@
                         </div>
                     </form>
                 </div>

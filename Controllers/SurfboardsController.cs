@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,27 +13,45 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using mvc_surfboard.Data;
 using mvc_surfboard.Models;
+using mvc_surfboard.Utility;
 
 namespace mvc_surfboard.Controllers
 {
     public class SurfboardsController : Controller
     {
         private readonly mvc_surfboardContext _context;
+        private readonly HttpClient _httpClient;
+        private readonly ApiService _apiService;
 
-        public SurfboardsController(mvc_surfboardContext context)
+        public SurfboardsController(mvc_surfboardContext context, HttpClient httpClient, ApiService apiService)
         {
             _context = context;
+            _httpClient = httpClient;
+            _apiService = apiService;
         }
 
         #region Index
         // GET: Surfboards
         public async Task<IActionResult> Index()
         {
-            var validSurfboards = await _context.Surfboard
-                .Where(surfboard => !surfboard.Rentals.Any())
-                .ToListAsync();
+            var surfboards = _apiService.UseApiService();
 
-            return View(validSurfboards);
+            return View(surfboards);
+            
+            //var validSurfboards = await _context.Surfboard
+            //    .Where(surfboard => !surfboard.Rentals.Any())
+            //    .ToListAsync();
+
+            //if (User == null)
+            //{
+            //    var newValidSurfboards = validSurfboards.Where((surfboard) => surfboard.Price <= 200);
+            //    return View(newValidSurfboards.ToList());
+            //}
+            //else
+            //{
+            //    return View(validSurfboards);
+            //}
+
         }
         #endregion
 
@@ -397,9 +416,25 @@ namespace mvc_surfboard.Controllers
 
                 if (!rentalExists)
                 {
-                    _context.Add(viewModel.Rental);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    var guestExists = await _context.Guest.FirstOrDefaultAsync(guest => guest.Email == viewModel.Rental.GuestEmail);
+
+                    if (guestExists == null)
+                    {
+                        _context.Add(viewModel.Rental);
+
+                        await _context.SaveChangesAsync();
+
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        Rental ren = viewModel.Rental;
+                        ren.Guest = null;
+
+                        _context.Add(ren);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
                 }
                 else
                 {

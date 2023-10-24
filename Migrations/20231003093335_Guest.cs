@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace mvc_surfboard.Migrations
 {
     /// <inheritdoc />
-    public partial class Test : Migration
+    public partial class Guest : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,6 +50,17 @@ namespace mvc_surfboard.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Guest",
+                columns: table => new
+                {
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Guest", x => x.Email);
                 });
 
             migrationBuilder.CreateTable(
@@ -186,12 +197,13 @@ namespace mvc_surfboard.Migrations
                 {
                     RentalId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    GuestEmail = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     SurfboardId = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -200,8 +212,12 @@ namespace mvc_surfboard.Migrations
                         name: "FK_Rental_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Rental_Guest_GuestEmail",
+                        column: x => x.GuestEmail,
+                        principalTable: "Guest",
+                        principalColumn: "Email");
                     table.ForeignKey(
                         name: "FK_Rental_Surfboard_SurfboardId",
                         column: x => x.SurfboardId,
@@ -250,6 +266,11 @@ namespace mvc_surfboard.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Rental_GuestEmail",
+                table: "Rental",
+                column: "GuestEmail");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rental_SurfboardId",
                 table: "Rental",
                 column: "SurfboardId");
@@ -286,6 +307,9 @@ namespace mvc_surfboard.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Guest");
 
             migrationBuilder.DropTable(
                 name: "Surfboard");
